@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sandy.tests.dao.RecordMapper">
+
+	 <sql id="selectCondition" >
+	    FROM ${table}
+		<where>
+			<if test="conditions">
+				<foreach collection="conditions"  item="condition" separator=" AND">
+					<if test="condition.compareType == null ">
+						${condition.column} = #{condition.value}
+					</if>
+					<if test="condition.compareType != null and  condition.compareType == 'IN'">
+						${condition.column} IN
+						<foreach collection="condition.values"  item="v" separator=", " open="( " close=" )">
+							#{v}
+						</foreach>
+					</if>
+				</foreach>
+			</if>
+		</where>
+	  </sql>
+
+
+	<select id="countByQuery" parameterType="com.sandy.tests.common.model.RecordQuery" resultType="java.lang.Integer" >
+		SELECT COUNT(1)
+		<include refid="selectCondition"/>
+	</select>
+
+	<select id="selectByQuery" parameterType="com.sandy.tests.common.model.RecordQuery" resultType="java.util.Map" >
+		SELECT <foreach collection="fields" separator=", " item="field" >${field.fieldColumn} AS ${field.fieldCode}  </foreach> 
+		<include refid="selectCondition"/>
+		ORDER BY id DESC
+		<if test="doPage">
+			LIMIT #{paging.limitStart,jdbcType=INTEGER},  #{paging.limitNum,jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	
+	
+	<insert id="insert"  parameterType="com.sandy.tests.common.model.RecordSave">
+		INSERT INTO  ${table}   <foreach collection="fields" separator=", " item="field" open="( " close=") "> ${field.fieldColumn}</foreach> 
+		VALUES 
+		 <foreach collection="values" separator=", " item="value" > 
+		 	<foreach collection="value" separator=", " item="v" open="( " close=") "> #{v}</foreach>
+		 </foreach>
+	</insert>
+	
+	
+	
+	
+
+ 	<select id="selectAllRecordInfo" resultType="com.sandy.tests.model.RecordInfo" >
+		SELECT record_type AS recordType, main_type AS mainType,  record_code AS recordCode, record_name AS recordName, record_table AS recordTable, 
+			record_desc AS recordDesc, search_def AS searchDef
+		FROM `record_info` WHERE state = 0 AND del = 0
+	</select>
+
+	<select id="selectAllFieldByCodes" resultType="com.sandy.tests.model.RecordField" parameterType="java.util.List">
+		SELECT record_code AS recordCode, field_code AS fieldCode, field_name AS fieldName, field_column AS fieldColumn, 
+			 field_sort AS fieldSort, def_search AS defSearch
+		FROM `record_field` WHERE  record_code IN 
+		<foreach collection="list" item="recordCode" open="( " close=" )" separator=", "> #{recordCode} </foreach>
+		AND state = 0 AND del = 0
+	</select>	
+
+	<select id="selectFieldByCode" resultType="com.sandy.tests.model.RecordField" parameterType="java.lang.String">
+		SELECT record_code AS recordCode, field_code AS fieldCode, field_name AS fieldName, field_column AS fieldColumn, 
+			field_datatype AS fieldDatatype, field_datalen AS fieldDatalen, field_Desc AS fieldDesc, field_sort AS fieldSort, 
+			def_search AS defSearch
+		FROM `record_field` WHERE record_code = #{recordCode} AND state = 0 AND del = 0
+	</select>			
+	
+
+
+
+</mapper>

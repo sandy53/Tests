@@ -1,0 +1,56 @@
+/**
+   �����
+*/
+.layout-left{
+	margin: 0px;
+	padding: 0px;
+}
+.layout-left div{
+	margin: 0px;
+}
+.layout-left a {
+	text-decoration: none;
+}
+
+/**  #2a6496  #428bca  */
+.side-title{
+	padding : 10px;
+	padding-top: 25px;
+	height: 70px;
+	color: #fff;
+	display: block;
+	border-right: solid 2px #428bca !important;  
+	border-bottom: solid 2px #428bca !important;
+/*	box-shadow: 1px 1px 10px #428bca;	*/
+	background: #428bca;  
+}
+.menu-title{
+	padding : 10px;
+	padding-top : 15px;
+	padding-left : 30px;
+	height: 50px;
+	display: block;
+	font-weight:bold;
+	border-top: solid 1px #d3d3d3;
+	border-right: solid 2px #428bca !important;
+	/* box-shadow: 5px 0px 10px #d3d3d3;	 */
+}
+.menu-title-acitve{
+	border-bottom: solid 2px #428bca !important;
+}
+.menu-title:HOVER, .menu-title:ACTIVE{
+	 /* box-shadow: 5px 3px 10px #d3d3d3;	 */
+}
+.list-group-item{
+	margin: 0px;
+	margin-left: 5px;
+	padding-left : 47px;
+	border : none;
+	border-top: solid 1px #d3d3d3;
+}
+.list-group-item:HOVER{
+	/* -webkit-box-shadow:10px 10px 15px #999 inset;  */          /* For Chrome5+, Safari5+ */
+}
+.list-group-item:first-child, .list-group-item:last-child{
+	border-radius: 0px;
+}

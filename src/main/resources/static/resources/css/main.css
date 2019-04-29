@@ -1,0 +1,208 @@
+.way-page{
+	position: relative;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+	margin: 2%  auto;
+	padding: 0px;
+	width: 90%;
+	height: 90%;
+	box-shadow: -3px 3px 10px #999;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	overflow: auto;
+}
+.page-content {
+	margin: 10px;
+}
+.page-title {
+	margin: 10px;
+	padding-bottom: 5px;
+	font-size: 20px;
+	font-weight: bold;	
+	border-bottom: 2px dashed  #fff;
+}
+.page-number {
+	position: absolute;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+	padding-left: 10px;
+	padding-right: 10px;
+	bottom: 5px;
+	width: 100%;
+	height: 30px;
+}
+.page-number a{
+	min-width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	vertical-align: middle;
+	color: #999;
+}
+.page-number .prev{
+	position: absolute;
+	left: 5px;
+}
+.page-number .next{
+	position: absolute;
+	right: 10px;
+}
+
+.thing-list {
+	margin: 1%  auto;
+	padding: 5px;
+	width: 90%;
+	height: 90%;
+	/* border: 1px solid gray; */
+	
+	overflow: auto;
+}
+
+.thing-list-ul {
+	margin-top: 15px;
+}
+
+.thing-list-ul li{
+	margin-top: 7px;
+	margin-bottom: 3px;
+	font-size: 15px;	
+}
+
+.thing-list-ul li a:hover{
+	text-decoration: underline;
+}
+
+.thing-register{
+	margin: 10px  auto;
+	padding: 10px;
+	width: 100%;
+	height: 100%;
+}
+
+.thing-contacts {
+	position: relative;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	padding-top: 30px;
+	border: 1px dashed red;
+}
+.thing-contacts .title{
+	position: absolute;
+	top: -10px;
+	left: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 1px dashed red;
+	background: #eee;
+}
+
+.lab-required { 
+	color: red;
+}
+
+.form-control {
+		
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	background: none;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+.form-control:active {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.thing-detail{
+	margin: 10px;
+}
+
+.thing-info {
+	position: relative;
+	margin-top: 20px;
+	width: 100%;
+	min-height: 100px;
+	border: 1px  dashed #ccc;
+}
+.thing-info .info-title {
+	margin-top: -15px;
+	margin-left: 10px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	max-width: 90%;
+	background: #fff;
+	border: 1px  dashed  #ccc;
+	font-weight: bold;
+}
+.thing-info .info-content{
+	margin: 10px;
+	padding-bottom: 10px;
+}
+.thing-info .info-time {
+	margin-top: 10px;
+	float: right;
+	color: #777;
+}
+
+.thing-info .info-label {
+	padding: 10px;
+	border-top: 1px  dashed  #ccc;
+	overflow: hidden;
+}
+.info-label .label-item {
+	position: relative;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 20px;
+	padding-left: 5px;
+	padding-right: 10px;
+	border: 1px  solid  #ccc;
+	border-left: none;
+	float: left;
+}
+
+.label-item .arrow {
+	position: absolute;
+	display: block;
+	top: 3.5px;
+	left: -10px;
+	width: 21px;
+	height: 21px;
+	border: 1px  solid  #ccc;
+	border-top: none;
+	border-right: none;
+	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg); 
+}
+
+.thing-reply {
+	margin-top: 10px;
+	border: 1px  dashed  #ccc;
+}
+
+.thing-reply-list {
+	margin-top: 10px;
+	border: 1px  dashed  #ccc;
+}
+.thing-reply-list .reply-info {
+	margin: 10px;
+	margin-top:20px;
+	padding-top: 10px;
+	border-top: 1px  dashed  #ccc;
+}
+
+.thing-reply-list .reply-info:first-child {
+		padding-top: 0px;
+	border-top: none;
+}
+
+.reply-info .info-footer {
+	margin-top: 10px;
+	text-align: right;
+	color: #777;
+}

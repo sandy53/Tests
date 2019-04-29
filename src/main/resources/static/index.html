@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="keywords" content="">
+<title>TESTS</title>
+<link href="./resources/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+<link href="./resources/jquery/jquery-ui.min.css" rel="stylesheet"></link>
+<link href="./resources/css/reset.css" rel="stylesheet"></link>
+<link href="./resources/css/cover.css" rel="stylesheet"></link>
+<link href="./resources/css/common.css" rel="stylesheet"></link>
+<link href="./resources/css/tests.css" rel="stylesheet"></link>
+<script src="./resources/jquery/jquery-3.2.1.js"></script>
+<!-- <script src="./resources/jquery/jquery.cookie.js"></script>
+<script src="./resources/jquery/jquery-ui.min.js"></script>
+<script src="./resources/jquery/jquery.form.min.js"></script>
+<script src="./resources/jquery/jquery.qrcode.min.js"></script> -->
+<!-- <script src="./resources/jquery/upload/ajaxfileupload.js"></script> -->
+<!-- <script src="./resources/jquery/upload/jquery.iframe-transport.js"></script> -->
+<!-- <script src="./resources/jquery/jquery.freezeheader.js"></script> -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./resources/js/was/constant/api_config.js?t=212413"></script>
+<script src="./resources/js/was/util/common_util.js?t=212413"></script>
+<script src="./resources/js/was/resp.js?t=21241113"></script>
+<script src="./resources/js/was/index.js?t=21241113"></script>
+<script src="./resources/js/was/tests.js?t=212411113"></script>
+<style>
+	html,body {	
+		height: 100%;
+	}
+</style>
+</head>
+<body>
+	<!-- 等候 -->
+	<span class="ms-loading ms-loading-first "></span>
+	<span class="ms-loading ms-loading-second "></span>
+	<div class="msg-box ">
+		<!-- 响应消息  msg-hide -->
+	</div>
+
+		<!--   API列表                                          start   -->
+		<div class="frame left">
+			<div>
+				<input type="text" id="j-input-search-api" class="form-control " placeholder="soso. Currently not supported" />
+			</div>
+	      	<div  >
+	      		<ul class="api-list">
+	      		</ul>
+	      	</div>
+	    </div>
+	    <!--   API列表                                          end   -->
+	    <div class="frame mid">
+	    	<div>
+				<ul class="menu-api-item">
+					<li class="menu-item" id="j-menu-all" data-target="#params-content" title="所有API列表"><a  href="javascript:void(0);">ALL</a></li>
+					<li  class="menu-item">|</li>
+					<li class="menu-item" id="menu-my" title="暂不支持个人模式"><a  href="javascript:void(0);">MY</a></li>
+				</ul>
+			</div>
+	      <div>
+	      </div>
+	      <div class="mid-content" id="group-content">
+	      		<div id="j-group-show"><a href="javascript:void(0);">Group</a></div>
+	      		<div id="j-group-content" class="fn-hide">
+		      		<input type="text" class="form-control" id="j-group-title" placeholder="组名">
+		      		<input type="hidden" id="j-group-code">
+		      		<ul class="group-list">
+		      		</ul>
+		      		<ul class="groups-list">
+		      		</ul>
+	      		</div>
+	      </div>
+	      <div class="mid-content" id="params-content">
+	      		<input type="hidden" id="j-api-code">
+	      		<ul id="params-list">
+	      		</ul>
+	      </div>
+	    </div>
+	     <div class="frame main" >
+	     
+	     	 <!--  请求路径                                              start       -->
+	      			<div class="tst-path">
+					    <div class="input-group">
+						      <div class="input-group-addon" id="j-method"><a href="javascript:void(0);" title="点击切换">GET</a></div>
+						      <input type="text" id="j-path" class="form-control " placeholder="api完整地址 当前不支持后面跟参数"
+						      			data-code=""  data-original=""
+						      >
+						      <div class="input-group-addon">
+						      	<a href="javascript:void(0);" id="j-btn-go" title="Runing">RUN <span id="run-group-plus"></span></a>
+						      	&nbsp;&nbsp;
+						      	<a href="javascript:void(0);" id="j-btn-reverse" title="Clear">X</a></div>
+					    </div>
+					  <!-- <button type="submit" class="btn btn-primary">Transfer cash</button> -->
+					  </div>
+					  
+				<!--  请求路径                                                end   -->
+				<!--  请求参数                                              start       -->
+				<div class="tst-params">
+						
+						<div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+						    <ul id="myTabs" class="nav nav-tabs" role="tablist">
+						      <li role="presentation" class="active"><a href="#api-params" id="params-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Params</a></li>
+						      <li role="presentation" class=""><a href="#api-headers" role="tab" id="headers-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Headers</a></li>
+						      <li role="presentation" class="dropdown">
+						        <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">More... <span class="caret"></span></a>
+						        <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
+						          <li><a href="#dropdown1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@one</a></li>
+						          <li><a href="#dropdown2" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@two</a></li>
+						        </ul>
+						      </li>
+						    </ul>
+						    <div id="myTabContent" class="tab-content">
+						      <div role="tabpanel" class="tab-pane fade active in tab-params" id="api-params" aria-labelledby="params-tab">
+						        	<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th></th><th>参数名 Key</th><th>参数值 Value</th><th>描述 Description</th>
+												<th><a href="javascript:void(0);" class="api-param-add mplus-item"><span >+</span> </a></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="api-param-item">
+												<td> <input type="checkbox" class="form-control param-check" checked="checked"></td>
+												<td><input type="text" class="form-control  param-key"  placeholder="参数名"></td>
+												<td><input type="text" class="form-control  param-value"  placeholder="参数值"></td>
+												<td><input type="text" class="form-control  param-description"  placeholder="描述"></td>
+												<td></td>
+											</tr>
+											<tr class="api-param-item">
+												<td> <input type="checkbox" class="form-control param-check" checked="checked"></td>
+												<td><input type="text" class="form-control  param-key"  placeholder="参数名"></td>
+												<td><input type="text" class="form-control  param-value"  placeholder="参数值"></td>
+												<td><input type="text" class="form-control  param-description"  placeholder="描述"></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+						      </div>
+						      <div role="tabpanel" class="tab-pane fade tab-params" id="api-headers" aria-labelledby="headers-tab">
+						        	<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th></th><th>参数名 Key</th><th>参数值 Value</th><th>描述 Description</th>
+												<th><a href="javascript:void(0);" class="api-param-add mplus-item"><span  >+</span> </a></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="api-param-item">
+												<td> <input type="checkbox" class="form-control param-check" checked="checked"></td>
+												<td><input type="text" class="form-control  param-key"  value="Authorization" placeholder="参数名"></td>
+												<td><input type="text" class="form-control  param-value"  placeholder="参数值"></td>
+												<td><input type="text" class="form-control  param-description"  placeholder="描述"></td>
+												<td></td>
+											</tr>
+											<tr class="api-param-item">
+												<td> <input type="checkbox" class="form-control param-check" checked="checked"></td>
+												<td><input type="text" class="form-control  param-key"  placeholder="参数名"></td>
+												<td><input type="text" class="form-control  param-value"  placeholder="参数值"></td>
+												<td><input type="text" class="form-control  param-description"  placeholder="描述"></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+						      </div>
+						      <div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab">
+						        <p>Nothing.</p>
+						      </div>
+						      <div role="tabpanel" class="tab-pane fade" id="dropdown2" aria-labelledby="dropdown2-tab">
+						        <p>Nothing.</p>
+						      </div>
+						    </div>
+						  </div>
+						
+						
+						
+				</div>
+				<!--  请求参数                                              end       -->
+				
+				<div class="tst-resp">
+					 <!-- 响应数据 -->
+				</div>
+	    </div>
+</body>
+</html>

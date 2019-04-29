@@ -1,0 +1,77 @@
+/* select2 ------------------------------------------------start   */
+.select2-selection__placeholder{
+	font-size: 12px;
+
+}
+
+
+.select2-container--default .select2-selection--multiple, .select2-dropdown, .select2-container--default .select2-selection--single {
+    border-radius: 0 !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #00aaee !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default .select2-search--dropdown .select2-search__field:focus {
+    border: solid #70B2E6 1px !important;
+    outline: 0;
+}
+
+.select2-container .select2-selection--single {
+	padding-top: 5px !important;    
+    height: 39px !important;
+}
+
+/* select2 ------------------------------------------------end   */
+
+
+
+
+.row{
+	margin-left: 0px;
+	margin-right: 0px; 
+	padding-left: 0px;
+	padding-right: 0px; 
+}
+
+/* .form-control{
+	max-width: 200px;
+   	min-width: 100px;
+} */
+
+.btn, .modal-content, .form-control, .input-group-addon, .panel-default{
+	border-radius:0px;
+}
+.form-control, .input-group {
+	margin-bottom: 1px;
+}
+
+.form-group  .button{
+	display: inline-table !important;	
+}
+
+
+/**   modal  ---------------------------------------------  start    */
+
+.modal-content{
+	overflow: hidden;
+}
+
+.close{
+	color: #008cba;
+}
+
+.row{
+	margin-top: 10px; 
+}
+ 
+ 
+/**   modal  -----------------------------------------------   end    */
+
+
+input[type="file"] {
+    display: inline;
+    padding: 8px 12px;
+    border-color: rgb(169, 169, 169);
+}
