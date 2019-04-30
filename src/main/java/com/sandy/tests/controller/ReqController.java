@@ -75,6 +75,7 @@ public class ReqController {
         reqLog.setCode(logCode);
         reqLog.setCreateTime(System.currentTimeMillis());
         reqLog.setPath(path);
+        reqLog.setMethod(method);
         recordService.doSave(RecordEnum.ReqLogs, Arrays.asList(reqLog));
 
         Map<String, String> httpParams = doSaveParams(ParamType.PARAM, reqLog, params, original);

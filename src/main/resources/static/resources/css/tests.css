@@ -70,7 +70,7 @@
 		background: #f1f1f1;
 	}
 	.item-api-runed a{
-		color: #00AAEE !important;
+		color: green !important;
 	}
 	.group-join {
 		position: absolute; 
@@ -128,4 +128,8 @@
 	#group-content .groups-list:hover .item-remove{
 		display: inline-block !important;
 		float: right;
+	}
+	
+	#params-list .li-item:first-child a{
+		color: green !important;
 	}

@@ -60,8 +60,9 @@ var Tests = {
 		  $(data.results).each(function(index, group){
 			  var item = $(`<li class="li-item item-group"></li>`);
 			  // 查询组关联的信息， 放到下方可编辑
-			  var groupItem = $(`<a href="javascript:void(0);" data-index="${index}">${group.title}</a></li>`);
+			  var groupItem = $(`<a href="javascript:void(0);" data-index="${index}">${group.title}</a>`);
 			  groupItem.bind("click",function(){
+				  console.log('load  groups ......')
 				  var groupEle =   $(`.item-group:not(:eq(${index}))`);
 				  var showApis = groupEle.hasClass("fn-hide");
 				  groupEle.toggleClass("fn-hide");
@@ -80,18 +81,28 @@ var Tests = {
 				  });
 			  }).appendTo(item);
 			  // 查询组关联的API信息 放到左侧待执行
-			  $(`<a class="group-do" href="javascript:void(0);"><-</a></li>`).bind("click",function(){
+			  $(`<a class="group-do" href="javascript:void(0);"><-</a> &nbsp;  &nbsp;`).bind("click",function(){
+				  event.preventDefault(); 
+				  console.log('to  group run++......')
+				  $(".api-list").html("");
 				  $("#j-group-code").val(group.code);
 				  API_INDEX = 0;
 				  group.code && 
-				  commonUtil.http(ApiConfig.groupApis , {versionCode : group.code }, function(data){
+				  commonUtil.http(ApiConfig.groups , {versionCode : group.code }, function(data){
 					   console.log(data)
-					   if(data.success){
-						   that.renderApi(data.data);
-						   that.renderRun(data.data);
+					   if(!data.success){
+						   return false;
 					   }
+						//   that.renderApi(data.data);
+						//   that.renderRun(data.data);
+					   $(data.data.results).each(function(index, groups){
+						   groups.path = groups.apiPath;
+						   groups.code = groups.apiCode;
+						   that.appendApi(groups, true);
+						   that.renderRun(data.data);
+					   });   
 				  });
-				  groupItem.click();
+				  //groupItem.click();
 			  }).prependTo(item);
 			  
 			  item.appendTo($(".group-list"));
@@ -157,20 +168,24 @@ var Tests = {
 		  return;
 	  }
 	  $(data.results).each(function(index, api){
-		 var obj =  that.apiFormat(api.path);
-		// console.log(path)
-		  api.pathInfo = obj;
-		  api.info = JSON.stringify(api);
-		  var li = $(`<li class="li-item item-api"  data-code="${api.code}" data-path="${api.path}" data-method="${api.method}"></li>`);
-		  // API列表事件
-		  $(`<a href="javascript:void(0);"> ${api.title}:${api.pathInfo.path}</a>`).bind("click", function(){
-			  	$("#j-method a").text(api.method);
-			  	// 隐藏分组数据
-			  	$("#params-content").removeClass("fn-hide");
-			  	$("#j-group-content").addClass("fn-hide");
-			    // 加载参数
-		    	that.loadLogs(api.code);
-		    }).appendTo(li);
+		 that.appendApi(api);
+	  });
+  },
+  appendApi : function (api, groupRun){
+	  var that = this;
+	  var li = $(`<li class="li-item item-api" data-code="${api.code}"></li>`);
+	  var path =(api.title ? api.title + ":" : "" )+ api.path;
+	  // API列表事件
+	  $(`<a href="javascript:void(0);">${path}</a>`).bind("click", function(){
+		  	$("#j-method a").text(api.method);
+		  	// 隐藏分组数据
+		  	$("#params-content").removeClass("fn-hide");
+		  	$("#j-group-content").addClass("fn-hide");
+		    // 加载参数
+	    	that.loadLogs(api.code);
+	    }).appendTo(li);
+	  
+	  if(!groupRun) {
 		  // API加入组事件
 		  $(`<a class="group-join" title="加入指定分组" href="javascript:void(0);">-></a>`).bind("click", function(){
 			  var groupCode = $("#j-group-code").val();
@@ -181,10 +196,8 @@ var Tests = {
 			  }
 				that.doGroup({groupCode: groupCode,  groupTitle: groupTitle, apiCode : api.code, apiPath : api.path});
 		    }).appendTo(li);
-		  
-		   li.appendTo($(".api-list"));
-	
-	  });
+	  }
+	   li.appendTo($(".api-list"));
 	  
   },
   /** 加载api记录 */
@@ -192,6 +205,7 @@ var Tests = {
 	  var that = this;
 	  commonUtil.http(ApiConfig.apiLogs , {apiCode: apiCode}, function(data){
 		   console.log(data)
+		   $("#params-content").removeClass("fn-hide");
 		   var list = $("#params-list");
 		   list.html("");
 		   if(data && !data.success){

@@ -23,6 +23,8 @@ public class ReqLogs extends RecordModel {
     private String            apiCode;
     @Genernate(value = "path", desc = "api全路径")
     private String            path;
+    @Genernate(value = "method", desc = "请求方式")
+    private String            method;
 
 
     public String getPath() {
@@ -64,5 +66,12 @@ public class ReqLogs extends RecordModel {
         this.updateTime = updateTime;
     }
 
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
 
 }
