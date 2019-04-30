@@ -25,6 +25,7 @@ import com.sandy.tests.record.model.RecordInfo;
 import com.sandy.tests.record.model.RecordQuery;
 import com.sandy.tests.record.model.RecordQuery.Condition;
 import com.sandy.tests.record.model.RecordSave;
+import com.sandy.tests.record.model.RecordUpdate;
 import com.sandy.tests.record.service.RecordService;
 
 import net.sf.json.JSONObject;
@@ -118,11 +119,13 @@ public class RecordServiceImpl implements RecordService {
      * @return
      */
     private void buildQueryCondition(RecordQuery query, RecordInfo recordInfo) {
+        query.setPrimaryKey(recordInfo.getPrimaryKey());
         //封装查询 条件
         query.setTable(recordInfo.getRecordTable());
         if (query.getFields() == null) {
             query.setFields(recordInfo.getFields());
         }
+        query.setFieldMap(recordInfo.getFieldMap());
         if (CollectionUtils.isEmpty(query.getFields())) { //没有默认查询字段
             throw new RuningException(
                 /*ResultCode.NOT_SET_SEARCH_FIELD,*/ recordInfo.getRecordCode());
@@ -209,6 +212,9 @@ public class RecordServiceImpl implements RecordService {
                 //不支持的字段 
                 continue;
             }
+            if (field.getPrimaryKey() != null && field.getPrimaryKey().intValue() == 1) {
+                record.setPrimaryKey(field.getFieldCode());
+            }
             if (record.getFields() == null) {
                 record.setFields(new ArrayList<>());
             }
@@ -230,6 +236,17 @@ public class RecordServiceImpl implements RecordService {
         Assert.notNull(recordEnum);
         Assert.notEmpty(records);
         this.doSave(new RecordSave(recordEnum.name(), records));
+    }
+
+    @Override
+    public void doRemove(RecordUpdate update) {
+        Assert.notNull(update);
+        RecordInfo recordInfo = queryRecordInfo(update.getRecordCode());
+        update.setTable(recordInfo.getRecordTable());
+        int remove = recordMapper.remove(update);
+        if (remove <= 0) {
+            throw new RuningException(ResultCode.RECORD_UPDATE_FAIL, update);
+        }
     }
 
 }

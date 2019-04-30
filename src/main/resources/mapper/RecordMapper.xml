@@ -18,9 +18,9 @@
 					</if>
 				</foreach>
 			</if>
+			AND state = 0
 		</where>
 	  </sql>
-
 
 	<select id="countByQuery" parameterType="com.sandy.tests.record.model.RecordQuery" resultType="java.lang.Integer" >
 		SELECT COUNT(1)
@@ -38,7 +38,7 @@
 	
 	
 	
-	<insert id="insert"  parameterType="com.sandy.tests.record.model.RecordSave">
+	<insert id="insert"  parameterType="com.sandy.tests.record.model.RecordSave" useGeneratedKeys="true" keyProperty="recordId">
 		INSERT INTO  ${table}   <foreach collection="fields" separator=", " item="field" open="( " close=") "> ${field.fieldColumn}</foreach> 
 		VALUES 
 		 <foreach collection="values" separator=", " item="value" > 
@@ -72,7 +72,8 @@
 		FROM `record_field` WHERE record_code = #{recordCode} AND state = 0 AND del = 0
 	</select>			
 	
-
-
-
+	<update id="remove" parameterType="com.sandy.tests.record.model.RecordUpdate">
+		UPDATE  ${table} SET state = -1, update_time = #{updateTime}  WHERE record_id = #{recordId}
+	</update>
+	
 </mapper>

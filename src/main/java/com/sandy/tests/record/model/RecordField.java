@@ -25,7 +25,7 @@ public class RecordField implements Serializable {
     @JsonIgnore
     private String            fieldColumn;
     /** 是否是数据库主键*/
-    private String            primaryKey;
+    private Integer           primaryKey;
 
     /** 字段数据类型 */
     @JsonIgnore
@@ -124,11 +124,11 @@ public class RecordField implements Serializable {
         this.defSearch = defSearch;
     }
 
-    public String getPrimaryKey() {
+    public Integer getPrimaryKey() {
         return primaryKey;
     }
 
-    public void setPrimaryKey(String primaryKey) {
+    public void setPrimaryKey(Integer primaryKey) {
         this.primaryKey = primaryKey;
     }
 

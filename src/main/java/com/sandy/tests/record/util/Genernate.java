@@ -36,9 +36,6 @@ public @interface Genernate {
     boolean ignore() default false;
     
     boolean isId() default false;
-    
-    boolean isStatus() default false;
-    
-    boolean isTime() default false;
+
     
 }

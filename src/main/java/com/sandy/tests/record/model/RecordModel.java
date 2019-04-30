@@ -16,11 +16,11 @@ public class RecordModel implements Serializable {
     private static final long serialVersionUID = 9113033764443216307L;
     @Genernate(value = "record_id", isId = true)
     protected Long            recordId;
-    @Genernate(desc = "状态", isStatus = true)
-    protected Byte            status;
-    @Genernate(value = "create_time", desc = "创建时间", isTime = true)
+    @Genernate(desc = "状态")
+    protected Byte            state;
+    @Genernate(value = "create_time", desc = "创建时间")
     protected Long            createTime;
-    @Genernate(value = "update_time", desc = "修改时间 ", isTime = true)
+    @Genernate(value = "update_time", desc = "修改时间 ")
     protected Long            updateTime;
     public Long getRecordId() {
         return recordId;
@@ -30,12 +30,12 @@ public class RecordModel implements Serializable {
         this.recordId = recordId;
     }
 
-    public Byte getStatus() {
-        return status;
+    public Byte getState() {
+        return state;
     }
 
-    public void setStatus(Byte status) {
-        this.status = status;
+    public void setState(Byte state) {
+        this.state = state;
     }
 
     public Long getCreateTime() {

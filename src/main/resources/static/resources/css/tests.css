@@ -124,3 +124,8 @@
 	#params-list, .groups-list {
 		background: #f5f5f5;
 	}
+	
+	#group-content .groups-list:hover .item-remove{
+		display: inline-block !important;
+		float: right;
+	}

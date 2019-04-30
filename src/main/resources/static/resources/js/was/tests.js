@@ -2,11 +2,11 @@ var API_INDEX = 0;
 var Tests = {
   init: function() {
     var that = this;
-  //  commonUtil.initBind(); // 绑定初始化事件
-  //  HandlebarsUtil.registerHelper(); // 模板引擎自定义工具注册
+  // commonUtil.initBind(); // 绑定初始化事件
+  // HandlebarsUtil.registerHelper(); // 模板引擎自定义工具注册
     that.initBind();
     that.loadApi();
-    //that.doGroup();
+    // that.doGroup();
   },
   initBind : function(){
 	  var that = this;
@@ -37,11 +37,6 @@ var Tests = {
   },
   doGroup : function (param){
 	  var that = this;
-/*	  var param = {
-			  groupTitle:"测试一个组",
-			  apiCode: '20e87ecb-44dc-4d19-a27e-992bfd461638',
-			  apiPath: 'http://192.168.40.215:8080/api/order/dict/status',
-	  }*/
 	  param &&
 	  commonUtil.http(ApiConfig.doGroup, param, function(data){
 		  console.log(data);
@@ -49,6 +44,7 @@ var Tests = {
 			   console.log(data);
 			   return;
 		   }
+		   that.appendGroups(data.data);
 	  });
   },
   /** 查询分组 */
@@ -63,7 +59,7 @@ var Tests = {
 		   data = data.data;
 		  $(data.results).each(function(index, group){
 			  var item = $(`<li class="li-item item-group"></li>`);
-			  //查询组关联的信息，  放到下方可编辑
+			  // 查询组关联的信息， 放到下方可编辑
 			  var groupItem = $(`<a href="javascript:void(0);" data-index="${index}">${group.title}</a></li>`);
 			  groupItem.bind("click",function(){
 				  var groupEle =   $(`.item-group:not(:eq(${index}))`);
@@ -74,7 +70,7 @@ var Tests = {
 					  return false;
 				  }
 				  $("#j-group-code").val(group.code);
-				  //查询分组关联信息
+				  // 查询分组关联信息
 				  group.code && 
 				  commonUtil.http(ApiConfig.groups , {versionCode : group.code }, function(data){
 					   console.log(data)
@@ -83,7 +79,7 @@ var Tests = {
 					   }
 				  });
 			  }).appendTo(item);
-			  //查询组关联的API信息  放到左侧待执行
+			  // 查询组关联的API信息 放到左侧待执行
 			  $(`<a class="group-do" href="javascript:void(0);"><-</a></li>`).bind("click",function(){
 				  $("#j-group-code").val(group.code);
 				  API_INDEX = 0;
@@ -102,7 +98,7 @@ var Tests = {
 		  });
 	  });
   },
-  /**  渲染 run执行按钮里的  +++ */
+  /** 渲染 run执行按钮里的 +++ */
   renderRun : function(data) {
 	 var that = this; 
 	 var len = 0;
@@ -118,12 +114,31 @@ var Tests = {
   renderGroups :function(data){
 	  var that = this;
 	  $(".groups-list").html("");
-	  $(data.results).each(function(index, group){
-		  var format =  that.apiFormat(group.apiPath);
-		  $(`<li class="li-item"><a href="javascript:void(0);">${format.path}</a></li>`).bind("click",function(){
-			  //点击事件
-		  }).appendTo($(".groups-list"));
+	  $(data.results).each(function(index, groups){
+		  groups.primaryKey = data.primaryKey;
+		  groups.recordCode = data.recordCode;
+		  that.appendGroups(groups);
 	  });
+  },
+  appendGroups : function (groups ){
+	  var that = this;
+	  var li =  $(`<li class="li-item"></li>`);
+	  li.appendTo($(".groups-list"));
+	  var item = $(`<a href="javascript:void(0);">${groups.apiPath}</a>`).bind("click",function(){
+		  // 点击事件
+	  }).appendTo(li);
+	  $(`<a class="item-remove fn-hide"  href="javascript:void(0);">x</a>`).bind("click",function(){
+		  if(!groups.recordId){
+			  commonUtil.msg("新加入的小伙伴不能马上删除噢!", true);
+			  return false;
+		  }
+		// 点击事件
+		  that.doRemove(groups.recordCode, groups.primaryKey, groups.recordId, function (data){
+			  if(data && data.success){
+				  li.remove();
+			  }
+		  });
+	  }).appendTo(li);
   },
   /** 查询api请求列表 */
   loadApi : function(){
@@ -143,20 +158,20 @@ var Tests = {
 	  }
 	  $(data.results).each(function(index, api){
 		 var obj =  that.apiFormat(api.path);
-		//  console.log(path)
+		// console.log(path)
 		  api.pathInfo = obj;
 		  api.info = JSON.stringify(api);
 		  var li = $(`<li class="li-item item-api"  data-code="${api.code}" data-path="${api.path}" data-method="${api.method}"></li>`);
-		  //API列表事件
+		  // API列表事件
 		  $(`<a href="javascript:void(0);"> ${api.title}:${api.pathInfo.path}</a>`).bind("click", function(){
 			  	$("#j-method a").text(api.method);
-			  	//隐藏分组数据
+			  	// 隐藏分组数据
 			  	$("#params-content").removeClass("fn-hide");
 			  	$("#j-group-content").addClass("fn-hide");
-			    //加载参数
+			    // 加载参数
 		    	that.loadLogs(api.code);
 		    }).appendTo(li);
-		  //API加入组事件
+		  // API加入组事件
 		  $(`<a class="group-join" title="加入指定分组" href="javascript:void(0);">-></a>`).bind("click", function(){
 			  var groupCode = $("#j-group-code").val();
 			  var groupTitle = $("#j-group-title").val();
@@ -186,12 +201,12 @@ var Tests = {
 		   var firstLog = null;
 		   $(data.data.results).each(function(index, log){
 				  var li = $(`<li class="li-item"></li>`);
-				  //API列表事件
+				  // API列表事件
 				  var logItem = $(`<a href="javascript:void(0);">${log.path}</a>`)
 				  logItem.bind("click", function(){
-					  //清除上一次的值
+					  // 清除上一次的值
 					  $(".tab-params .form-control").val("");
-					  that.loadLogParams(log, isRun); //加载参数
+					  that.loadLogParams(log, isRun); // 加载参数
 				  }).appendTo(li);
 				  li.appendTo(list);
 				  if(index == 0){
@@ -202,7 +217,7 @@ var Tests = {
 		   
 		   firstLog && $("#j-path").val(firstLog.path).data("original",firstLog.path);
 		   console.log(first)
-		   //默认第一个执行
+		   // 默认第一个执行
 		   first && first.click();
 	  });
   },
@@ -214,7 +229,7 @@ var Tests = {
 		   if(data && !data.success){
 			   return;
 		   }
-	    	//console.log(api)
+	    	// console.log(api)
 	    	$("#j-path").val(log.path).data("code", log.code).data("original",log.path);
 		   var params = {};
 		   var headerIndex = 0;
@@ -254,13 +269,29 @@ var Tests = {
 		   isRun && that.doGo();
 	  });
   },
-  //api路径请求格式化
+  doRemove : function (recordCode, primary, key, callback){
+	  var that = this;
+	  if(!confirm("删除后无法再恢复，确认删除吗？")){
+		  commonUtil.msg("看吧，我就说你点错了!");
+		  return false;
+	  }
+	  var param = {
+			  recordCode : recordCode,
+			  primary : primary,
+			  key : key
+	  }
+	  commonUtil.http(ApiConfig.remove, param, function(data){
+		  callback && callback(data);
+	  });
+	  
+  },
+  // api路径请求格式化
   apiFormat : function(path){
 	  if(!path){
 		  return;
 	  }
 	  var obj = {}
-	  //协议
+	  // 协议
 	  if(path.indexOf("http://") == 0){
 		  obj.protocol = 'http';
 		  path = path.replace("http://", "");
@@ -268,15 +299,15 @@ var Tests = {
 		  obj.protocol = 'https';
 		  path = path.replace("https://", "");
 	  }
-	  //截取端口前的数据
+	  // 截取端口前的数据
 	  path = path.substring(path.indexOf("/"));
 	  obj.path=path;
 	  return obj;
   },
-  //进行请求
+  // 进行请求
   doGo : function() {
 	  var that = this;
-	 //收集请求参数
+	 // 收集请求参数
 	  var path = $("#j-path").val();
 	  if(!path){
 		  alert("路径都不填，是要上天吗?");
@@ -296,12 +327,12 @@ var Tests = {
 	  param.params = params;
 	  param.headers = headers;
 	  console.log(param)
-	  commonUtil.http("/psi/tests/request", param, function(data){
+	  commonUtil.http(ApiConfig.request, param, function(data){
 		  Resp.render(data);
-		   //console.log(html);
-		   //$(".tst-resp").html(html);
+		   // console.log(html);
+		   // $(".tst-resp").html(html);
 	  });
-	  //console.log(param);
+	  // console.log(param);
   },
   /** 加载 参数 */
   loadParams : function(parent){

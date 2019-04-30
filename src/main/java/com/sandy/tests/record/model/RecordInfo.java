@@ -48,6 +48,8 @@ public class RecordInfo implements Serializable {
     /** 是否默认搜索*/
     private Byte                               searchDef;
 
+    /** 主键字段名*/
+    protected String                 primaryKey;
 
 
     public String getRecordCode() {
@@ -132,6 +134,14 @@ public class RecordInfo implements Serializable {
 
     public void setFieldMap(Map<String, RecordField> fieldMap) {
         this.fieldMap = fieldMap;
+    }
+
+    public String getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(String primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
 }

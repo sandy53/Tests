@@ -46,14 +46,7 @@ public class ReqLogs extends RecordModel {
     public void setApiCode(String apiCode) {
         this.apiCode = apiCode;
     }
-    @Override
-    public Byte getStatus() {
-        return status;
-    }
-    @Override
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
+
     @Override
     public Long getCreateTime() {
         return createTime;

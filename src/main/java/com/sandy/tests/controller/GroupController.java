@@ -30,7 +30,7 @@ import com.sandy.tests.record.service.RecordService;
  * @version $Id: GroupController.java, v 0.1 2019年4月25日 下午1:47:21 sandy Exp $
  */
 @RestController
-@RequestMapping("/psi/tests/")
+@RequestMapping("/api/tests/")
 public class GroupController {
 
     //  private Logger logger = LoggerFactory.getLogger(GroupController.class);
@@ -94,15 +94,16 @@ public class GroupController {
             version.setCreateTime(millis);
             recordService.doSave(RecordEnum.ApiVersion, Arrays.asList(version));
         }
+        ApiVersions versions = null;
         if (!StringUtils.isEmpty(groupCode)) {
-            ApiVersions versions = new ApiVersions();
+            versions = new ApiVersions();
             versions.setVersionCode(groupCode);
             versions.setApiCode(apiCode);
             versions.setApiPath(apiPath);
             versions.setCreateTime(millis);
             recordService.doSave(RecordEnum.ApiVersions, Arrays.asList(versions));
         }
-        return new ReqResult<>(version);
+        return new ReqResult<>(versions);
     }
 
 

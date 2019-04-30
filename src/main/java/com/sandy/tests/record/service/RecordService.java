@@ -7,6 +7,7 @@ import com.sandy.tests.common.enums.RecordEnum;
 import com.sandy.tests.record.model.RecordInfo;
 import com.sandy.tests.record.model.RecordQuery;
 import com.sandy.tests.record.model.RecordSave;
+import com.sandy.tests.record.model.RecordUpdate;
 
 
 public interface RecordService {
@@ -27,4 +28,6 @@ public interface RecordService {
 
 
     void doSave(RecordEnum recordEnum, List<?> record);
+
+    void doRemove(RecordUpdate update);
 }

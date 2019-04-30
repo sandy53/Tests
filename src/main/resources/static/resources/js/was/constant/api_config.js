@@ -5,15 +5,18 @@ var apiBase = "";
 //接口配置
 var ApiConfig = {
 		
-		apiInfo : apiBase +  "/psi/tests/common/ApiInfo/search",
-		apiParams : apiBase +  "/psi/tests/common/ApiParams/search",
-		apiLogs : apiBase +  "/psi/tests/common/ReqLogs/search",
-		apiLogParams : apiBase +  "/psi/tests/common/ReqParams/search",
+		remove  : apiBase +  "/api/tests/common/remove",
 		
-		group : apiBase + "/psi/tests/common/ApiVersion/search",
-		groups : apiBase + "/psi/tests/common/ApiVersions/search",
-		doGroup : apiBase + "/psi/tests/group/save",
+		apiInfo : apiBase +  "/api/tests/common/ApiInfo/search",
+		apiParams : apiBase +  "/api/tests/common/ApiParams/search",
+		apiLogs : apiBase +  "/api/tests/common/ReqLogs/search",
+		apiLogParams : apiBase +  "/api/tests/common/ReqParams/search",
 		
-		groupApis : apiBase + "/psi/tests/group/apis",
+		group : apiBase + "/api/tests/common/ApiVersion/search",
+		groups : apiBase + "/api/tests/common/ApiVersions/search",
+		doGroup : apiBase + "/api/tests/group/save",
+		
+		request : apiBase +  "/api/tests/request",
+		groupApis : apiBase + "/api/tests/group/apis",
 
 };

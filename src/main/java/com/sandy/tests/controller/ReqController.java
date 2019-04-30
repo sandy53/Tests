@@ -42,7 +42,7 @@ import net.sf.json.JSONObject;
  * @version $Id: ReqController.java, v 0.1 2019年4月25日 下午1:47:21 sandy Exp $
  */
 @RestController
-@RequestMapping("/psi/tests/")
+@RequestMapping("/api/tests/")
 public class ReqController {
 
     private Logger        logger = LoggerFactory.getLogger(ReqController.class);

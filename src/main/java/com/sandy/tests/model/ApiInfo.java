@@ -67,34 +67,7 @@ public class ApiInfo extends RecordModel {
         this.remarks = remarks;
     }
 
-    @Override
-    public Byte getStatus() {
-        return status;
-    }
 
-    @Override
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
 
-    @Override
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    @Override
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    @Override
-    public Long getUpdateTime() {
-        return updateTime;
-    }
-
-    @Override
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
-    }
 
 }

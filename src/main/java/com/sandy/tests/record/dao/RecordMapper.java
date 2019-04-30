@@ -6,6 +6,7 @@ import com.sandy.tests.record.model.RecordField;
 import com.sandy.tests.record.model.RecordInfo;
 import com.sandy.tests.record.model.RecordQuery;
 import com.sandy.tests.record.model.RecordSave;
+import com.sandy.tests.record.model.RecordUpdate;
 
 
 
@@ -34,5 +35,7 @@ public interface RecordMapper {
 
 
     int insert(RecordSave save);
+
+    int remove(RecordUpdate update);
 
 }

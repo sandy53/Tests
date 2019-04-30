@@ -11,8 +11,7 @@ import java.util.List;
 public class RecordSave extends RecordQS {
 
     /**  */
-    private static final long serialVersionUID = 7670499768194587783L;
-
+    private static final long  serialVersionUID = 7670499768194587783L;
 
     /**
      * 需要的保存的记录
@@ -23,7 +22,6 @@ public class RecordSave extends RecordQS {
      * 由 records 转换而来能保存的值 
      */
     private List<List<String>> Values;
-
 
     public RecordSave() {
         super();

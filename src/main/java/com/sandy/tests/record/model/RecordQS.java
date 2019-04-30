@@ -2,6 +2,7 @@ package com.sandy.tests.record.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,9 +18,16 @@ public class RecordQS implements Serializable {
     /**  */
     private static final long   serialVersionUID = 4333528055808501764L;
 
+    /** 主键字段名*/
+    protected String            primaryKey;
+
     protected String            recordCode;
     protected String                  recordName;
+
+    /** 字段map */
+    private Map<String, RecordField> fieldMap;
     /** 列*/
+    @JsonIgnore
     protected List<RecordField>       fields;
     /** 表*/
     @JsonIgnore
@@ -55,6 +63,22 @@ public class RecordQS implements Serializable {
 
     public void setTable(String table) {
         this.table = table;
+    }
+
+    public String getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(String primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    public Map<String, RecordField> getFieldMap() {
+        return fieldMap;
+    }
+
+    public void setFieldMap(Map<String, RecordField> fieldMap) {
+        this.fieldMap = fieldMap;
     }
 
 }
