@@ -1,4 +1,4 @@
-package com.sandy.tests.service.impl;
+package com.sandy.tests.record.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,16 +16,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.sandy.tests.common.enums.RecordEnum;
-import com.sandy.tests.common.model.RecordQuery;
-import com.sandy.tests.common.model.RecordQuery.Condition;
-import com.sandy.tests.common.model.RecordSave;
 import com.sandy.tests.common.model.ResultCode;
 import com.sandy.tests.common.util.Assert;
 import com.sandy.tests.common.util.exception.RuningException;
-import com.sandy.tests.dao.RecordMapper;
-import com.sandy.tests.model.RecordField;
-import com.sandy.tests.model.RecordInfo;
-import com.sandy.tests.service.RecordService;
+import com.sandy.tests.record.dao.RecordMapper;
+import com.sandy.tests.record.model.RecordField;
+import com.sandy.tests.record.model.RecordInfo;
+import com.sandy.tests.record.model.RecordQuery;
+import com.sandy.tests.record.model.RecordQuery.Condition;
+import com.sandy.tests.record.model.RecordSave;
+import com.sandy.tests.record.service.RecordService;
 
 import net.sf.json.JSONObject;
 
@@ -49,7 +49,7 @@ public class RecordServiceImpl implements RecordService {
 
 
     /** mybatis 查询标识*/
-    private final static String   QUERY_STATEMENT = "com.sandy.tests.dao.RecordMapper.selectByQuery";
+    private final static String            QUERY_STATEMENT = "com.sandy.tests.record.dao.RecordMapper.selectByQuery";
 
     @Resource
     private SqlSessionTemplate    sqlSessionTemplate;

@@ -282,7 +282,6 @@ var Tests = {
 		  alert("路径都不填，是要上天吗?");
 		  return false;
 	  }
-	  var apiCode = $("#j-path").data("code");
       var original = $("#j-path").data("original");
       if(!original && path != original ){
     	  apiCode = "";
@@ -290,8 +289,7 @@ var Tests = {
 	  var method = $("#j-method a").text();
 	  var param = {
 			  method : method,
-			  path : path,
-			  apiCode : apiCode
+			  path : path
 	  }
 	  var params = that.loadParams("#api-params");
 	  var headers = that.loadParams("#api-headers");

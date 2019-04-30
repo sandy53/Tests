@@ -1,10 +1,9 @@
-package com.sandy.tests.common.model;
+package com.sandy.tests.record.model;
 
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sandy.tests.model.RecordField;
 
 /**
  *  查询封装模型类

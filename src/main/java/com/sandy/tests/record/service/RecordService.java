@@ -1,12 +1,12 @@
-package com.sandy.tests.service;
+package com.sandy.tests.record.service;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.sandy.tests.common.enums.RecordEnum;
-import com.sandy.tests.common.model.RecordQuery;
-import com.sandy.tests.common.model.RecordSave;
-import com.sandy.tests.model.RecordInfo;
+import com.sandy.tests.record.model.RecordInfo;
+import com.sandy.tests.record.model.RecordQuery;
+import com.sandy.tests.record.model.RecordSave;
 
 
 public interface RecordService {

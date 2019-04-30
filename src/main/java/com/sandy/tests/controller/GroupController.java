@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sandy.tests.common.enums.RecordEnum;
 import com.sandy.tests.common.enums.VersionType;
-import com.sandy.tests.common.model.RecordQuery;
-import com.sandy.tests.common.model.RecordQuery.CompareType;
-import com.sandy.tests.common.model.RecordQuery.Condition;
 import com.sandy.tests.common.model.ReqResult;
 import com.sandy.tests.common.util.Assert;
-import com.sandy.tests.record.model.ApiVersion;
-import com.sandy.tests.record.model.ApiVersions;
-import com.sandy.tests.service.RecordService;
+import com.sandy.tests.model.ApiVersion;
+import com.sandy.tests.model.ApiVersions;
+import com.sandy.tests.record.model.RecordQuery;
+import com.sandy.tests.record.model.RecordQuery.CompareType;
+import com.sandy.tests.record.model.RecordQuery.Condition;
+import com.sandy.tests.record.service.RecordService;
 
 /**
  *  api 组合控制器

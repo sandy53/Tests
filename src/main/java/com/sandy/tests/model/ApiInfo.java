@@ -1,8 +1,7 @@
-package com.sandy.tests.record.model;
+package com.sandy.tests.model;
 
-import java.io.Serializable;
-
-import com.sandy.tests.util.Genernate;
+import com.sandy.tests.record.model.RecordModel;
+import com.sandy.tests.record.util.Genernate;
 
 /**
  * api信息
@@ -11,7 +10,7 @@ import com.sandy.tests.util.Genernate;
  * @version $Id: ApiInfo.java, v 0.1 2019年4月23日 上午9:12:27 sandy Exp $
  */
 @Genernate(value = "ts_api_info", desc = "api基础信息表")
-public class ApiInfo implements Serializable {
+public class ApiInfo extends RecordModel {
 
     /**  */
     private static final long serialVersionUID = 6254307716619590738L;
@@ -27,12 +26,6 @@ public class ApiInfo implements Serializable {
     private String            method;
     @Genernate(desc = "备注")
     private String            remarks;
-    @Genernate(desc = "状态")
-    private Byte              status;
-    @Genernate(value = "create_time", desc = "创建时间")
-    private Long              createTime;
-    @Genernate(value = "update_time", desc = "修改时间 ")
-    private Long              updateTime;
 
     public String getCode() {
         return code;
@@ -74,26 +67,32 @@ public class ApiInfo implements Serializable {
         this.remarks = remarks;
     }
 
+    @Override
     public Byte getStatus() {
         return status;
     }
 
+    @Override
     public void setStatus(Byte status) {
         this.status = status;
     }
 
+    @Override
     public Long getCreateTime() {
         return createTime;
     }
 
+    @Override
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
+    @Override
     public Long getUpdateTime() {
         return updateTime;
     }
 
+    @Override
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }

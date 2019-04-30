@@ -1,4 +1,4 @@
-package com.sandy.tests.service.impl;
+package com.sandy.tests.record.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,7 @@
-package com.sandy.tests.record.model;
+package com.sandy.tests.model;
 
-import java.io.Serializable;
-
-import com.sandy.tests.util.Genernate;
+import com.sandy.tests.record.model.RecordModel;
+import com.sandy.tests.record.util.Genernate;
 
 /**
  *  API请求参数表
@@ -11,7 +10,7 @@ import com.sandy.tests.util.Genernate;
  * @version $Id: ApiParams.java, v 0.1 2019年4月23日 上午11:53:51 sandy Exp $
  */
 @Genernate(value = "ts_api_params", desc = "api请求参数表")
-public class ApiParams implements Serializable {
+public class ApiParams extends RecordModel {
 
     /**  */
     private static final long serialVersionUID = 7293121031193925629L;
@@ -30,12 +29,7 @@ public class ApiParams implements Serializable {
     private String            dateLen;
     @Genernate(desc = "状态")
     private String            required;
-    @Genernate(desc = "状态")
-    private Byte              status;
-    @Genernate(value = "create_time", desc = "创建时间")
-    private Long              createTime;
-    @Genernate(value = "update_time", desc = "修改时间 ")
-    private Long              updateTime;
+ 
 
     public String getApiCode() {
         return apiCode;
@@ -93,26 +87,32 @@ public class ApiParams implements Serializable {
         this.required = required;
     }
 
+    @Override
     public Byte getStatus() {
         return status;
     }
 
+    @Override
     public void setStatus(Byte status) {
         this.status = status;
     }
 
+    @Override
     public Long getCreateTime() {
         return createTime;
     }
 
+    @Override
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
+    @Override
     public Long getUpdateTime() {
         return updateTime;
     }
 
+    @Override
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }

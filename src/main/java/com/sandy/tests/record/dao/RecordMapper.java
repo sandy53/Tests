@@ -1,11 +1,11 @@
-package com.sandy.tests.dao;
+package com.sandy.tests.record.dao;
 
 import java.util.List;
 
-import com.sandy.tests.common.model.RecordQuery;
-import com.sandy.tests.common.model.RecordSave;
-import com.sandy.tests.model.RecordField;
-import com.sandy.tests.model.RecordInfo;
+import com.sandy.tests.record.model.RecordField;
+import com.sandy.tests.record.model.RecordInfo;
+import com.sandy.tests.record.model.RecordQuery;
+import com.sandy.tests.record.model.RecordSave;
 
 
 

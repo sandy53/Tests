@@ -1,4 +1,4 @@
-package com.sandy.tests.controller;
+package com.sandy.tests.record.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sandy.tests.common.model.Paging;
-import com.sandy.tests.common.model.RecordQuery;
-import com.sandy.tests.common.model.RecordQuery.Condition;
 import com.sandy.tests.common.model.ReqResult;
 import com.sandy.tests.common.util.HttpUtil;
-import com.sandy.tests.service.RecordService;
+import com.sandy.tests.record.model.Paging;
+import com.sandy.tests.record.model.RecordQuery;
+import com.sandy.tests.record.model.RecordQuery.Condition;
+import com.sandy.tests.record.service.RecordService;
 
 
 @RestController

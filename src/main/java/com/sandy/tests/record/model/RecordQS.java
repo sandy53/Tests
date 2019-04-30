@@ -1,10 +1,9 @@
-package com.sandy.tests.common.model;
+package com.sandy.tests.record.model;
 
 import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sandy.tests.model.RecordField;
 
 
 /**

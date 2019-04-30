@@ -1,4 +1,4 @@
-package com.sandy.tests.model;
+package com.sandy.tests.record.model;
 
 import java.io.Serializable;
 
@@ -24,6 +24,8 @@ public class RecordField implements Serializable {
     /** 字段列名 */
     @JsonIgnore
     private String            fieldColumn;
+    /** 是否是数据库主键*/
+    private String            primaryKey;
 
     /** 字段数据类型 */
     @JsonIgnore
@@ -122,6 +124,13 @@ public class RecordField implements Serializable {
         this.defSearch = defSearch;
     }
 
+    public String getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(String primaryKey) {
+        this.primaryKey = primaryKey;
+    }
 
 
 }

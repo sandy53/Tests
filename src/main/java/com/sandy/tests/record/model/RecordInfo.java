@@ -1,4 +1,4 @@
-package com.sandy.tests.model;
+package com.sandy.tests.record.model;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.sandy.tests.util;
+package com.sandy.tests.record.util;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -34,4 +34,11 @@ public @interface Genernate {
     String desc() default "";
 
     boolean ignore() default false;
+    
+    boolean isId() default false;
+    
+    boolean isStatus() default false;
+    
+    boolean isTime() default false;
+    
 }
