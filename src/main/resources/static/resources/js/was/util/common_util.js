@@ -85,17 +85,17 @@ var commonUtil = {
 		return reqParam;
 	},
 	
-	http : function(url, param, callback) { // ajax 统一方法
+	http : function(path, param, callback) { // ajax 统一方法
 		var that = this;
 		if(!param){
 			param = {};
 		}
 		param.limitNum = 20;
 		commonUtil.loading(true);
-		url &&
+		path &&
 		$.ajax({
-			type :  "POST",
-			url : url,
+			type : path.method ?  path.method : "GET",
+			url : path.url,
 			data : param,
 			beforeSend: function(request) {
 				//token && request.setRequestHeader("Authorization", token);

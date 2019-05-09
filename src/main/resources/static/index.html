@@ -103,6 +103,7 @@
 						    <ul id="myTabs" class="nav nav-tabs" role="tablist">
 						      <li role="presentation" class="active"><a href="#api-params" id="params-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Params</a></li>
 						      <li role="presentation" class=""><a href="#api-headers" role="tab" id="headers-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Headers</a></li>
+						      <li role="presentation" class=""><a href="#api-info" role="tab" id="info-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Information</a></li>
 						      <li role="presentation" class="dropdown">
 						        <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">More... <span class="caret"></span></a>
 						        <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
@@ -163,6 +164,24 @@
 											</tr>
 										</tbody>
 									</table>
+						      </div>
+						      <div role="tabpanel" class="tab-pane fade" id="api-info" aria-labelledby="info-tab">
+						      	<div id="info-content">
+						      		<br/>
+						      		<div class="input-group">
+									      <div class="input-group-addon">描述</div>
+									      <input type="hidden" class="info-recordId">
+									      <input type="text" class="form-control info-title" placeholder="接口名称 " maxlength="200">
+								    </div>
+								     <br/>
+								    <div class="input-group">
+									      <div class="input-group-addon">备注</div>
+									      <textarea class="form-control info-remarks" maxlength="200" placeholder="200字以内"></textarea>
+								    </div>
+								    <div class="input-group">
+									      <br/><input class="btn btn-default" id="j-info-save" type="button" value="Save">
+								    </div>
+						      	</div>
 						      </div>
 						      <div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab">
 						        <p>Nothing.</p>

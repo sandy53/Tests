@@ -38,4 +38,6 @@ public interface RecordMapper {
 
     int remove(RecordUpdate update);
 
+    int update(RecordUpdate update);
+
 }

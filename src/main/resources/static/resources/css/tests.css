@@ -130,6 +130,10 @@
 		float: right;
 	}
 	
-	#params-list .li-item:first-child a{
+	#params-list .item-active{
 		color: green !important;
+	}
+	
+	#info-content {
+		margin: 10px;
 	}

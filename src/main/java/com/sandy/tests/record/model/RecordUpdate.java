@@ -1,5 +1,7 @@
 package com.sandy.tests.record.model;
 
+import java.util.List;
+
 /**
  *  记录变更用模型
  * 
@@ -16,6 +18,10 @@ public class RecordUpdate extends RecordQS {
 
     private Long              updateTime;
 
+    /**
+     * 需要修改的字段集
+     */
+    private List<FieldUpdate> updateFields;
 
     public RecordUpdate() {
         super();
@@ -37,5 +43,12 @@ public class RecordUpdate extends RecordQS {
         this.recordId = recordId;
     }
 
+    public List<FieldUpdate> getUpdateFields() {
+        return updateFields;
+    }
+
+    public void setUpdateFields(List<FieldUpdate> updateFields) {
+        this.updateFields = updateFields;
+    }
 
 }

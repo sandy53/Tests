@@ -76,4 +76,13 @@
 		UPDATE  ${table} SET state = -1, update_time = #{updateTime}  WHERE record_id = #{recordId}
 	</update>
 	
+	
+	<update id="update" parameterType="com.sandy.tests.record.model.RecordUpdate">
+		UPDATE  ${table} SET 
+			 <foreach collection="updateFields" separator=", " item="field" > 
+		 			${field.fieldColumn} = #{field.value}
+		 	</foreach>
+			 , update_time = #{updateTime}  WHERE record_id = #{recordId}
+	</update>
+	
 </mapper>

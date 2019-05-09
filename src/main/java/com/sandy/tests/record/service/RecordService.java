@@ -30,4 +30,7 @@ public interface RecordService {
     void doSave(RecordEnum recordEnum, List<?> record);
 
     void doRemove(RecordUpdate update);
+
+    void doUpdate(RecordUpdate update);
+
 }

@@ -23,6 +23,29 @@ var Tests = {
 	  $("#j-menu-all").bind("click",function(){
 		  that.loadApi();
 	  });
+	  
+	  $("#j-info-save").bind("click",function(){
+		  var recordId = $("#info-content .info-recordId").val();
+		  var title = $("#info-content .info-title").val();
+		  var remarks = $("#info-content .info-remarks").val();
+		  if(!recordId){
+			  commonUtil.msg("数据找不到了噢！");
+		  }
+		  var param = {
+				  recordCode : "ApiInfo",
+				  recordId: recordId,
+				  title: title,
+				  remarks: remarks,
+		  }
+		  commonUtil.http(ApiConfig.update, param, function(data){
+			  console.log(data);
+			   if(!data.success){
+				   console.log(data);
+				   return;
+			   }
+			   commonUtil.msg("保存成功！");
+		  });
+	  });
 	 
   },
   doRun: function (){
@@ -181,6 +204,11 @@ var Tests = {
 		  	// 隐藏分组数据
 		  	$("#params-content").removeClass("fn-hide");
 		  	$("#j-group-content").addClass("fn-hide");
+		  	
+		  	$("#info-content .info-recordId").val(api.recordId);
+		  	$("#info-content .info-title").val(api.title);
+		  	$("#info-content .info-remarks").val(api.remarks);
+		  	console.log(api)
 		    // 加载参数
 	    	that.loadLogs(api.code);
 	    }).appendTo(li);
@@ -213,14 +241,17 @@ var Tests = {
 		   }
 		   var first = null;
 		   var firstLog = null;
+		   var active = "item-active";
 		   $(data.data.results).each(function(index, log){
 				  var li = $(`<li class="li-item"></li>`);
 				  // API列表事件
-				  var logItem = $(`<a href="javascript:void(0);">${log.path}</a>`)
+				  var logItem = $(`<a class="${index == 0 ? active : ''}" href="javascript:void(0);">${log.path}</a>`)
 				  logItem.bind("click", function(){
 					  // 清除上一次的值
 					  $(".tab-params .form-control").val("");
 					  that.loadLogParams(log, isRun); // 加载参数
+					  $(".item-active").removeClass(active);
+					  $(this).addClass(active)
 				  }).appendTo(li);
 				  li.appendTo(list);
 				  if(index == 0){

@@ -20,6 +20,7 @@ import com.sandy.tests.common.model.ResultCode;
 import com.sandy.tests.common.util.Assert;
 import com.sandy.tests.common.util.exception.RuningException;
 import com.sandy.tests.record.dao.RecordMapper;
+import com.sandy.tests.record.model.FieldUpdate;
 import com.sandy.tests.record.model.RecordField;
 import com.sandy.tests.record.model.RecordInfo;
 import com.sandy.tests.record.model.RecordQuery;
@@ -51,6 +52,9 @@ public class RecordServiceImpl implements RecordService {
 
     /** mybatis 查询标识*/
     private final static String            QUERY_STATEMENT = "com.sandy.tests.record.dao.RecordMapper.selectByQuery";
+
+    /** 主键字段标识*/
+    private final static int               FIELD_PRIMARY   = 1;
 
     @Resource
     private SqlSessionTemplate    sqlSessionTemplate;
@@ -245,6 +249,44 @@ public class RecordServiceImpl implements RecordService {
         update.setTable(recordInfo.getRecordTable());
         int remove = recordMapper.remove(update);
         if (remove <= 0) {
+            throw new RuningException(ResultCode.RECORD_UPDATE_FAIL, update);
+        }
+    }
+
+    @Override
+    public void doUpdate(RecordUpdate update) {
+        Assert.notNull(update);
+        List<FieldUpdate>  conditionFileds = null;
+        Assert.notEmpty((conditionFileds = update.getUpdateFields()));
+        RecordInfo recordInfo = queryRecordInfo(update.getRecordCode());
+        update.setTable(recordInfo.getRecordTable());
+        //字段列转换
+        Map<String, RecordField> fieldMap = recordInfo.getFieldMap();
+        RecordField recordField = null;
+        List<FieldUpdate> unExistsFields = new ArrayList<FieldUpdate>();
+        for (FieldUpdate field : conditionFileds) {
+            recordField = fieldMap.get(field.getFieldCode());
+            if (recordField == null) {
+                unExistsFields.add(field);
+                logger.error("doUpdate  unknow field: {}", field.getFieldCode());
+            } else {
+                if (recordField.getPrimaryKey() == FIELD_PRIMARY) {
+                    update.setRecordId(Long.valueOf(field.getValue()));
+                    update.setPrimaryKey(recordField.getFieldColumn());
+                    unExistsFields.add(field);
+                } else {
+                    field.setFieldColumn(recordField.getFieldColumn());
+                }
+            }
+        }
+        if(!unExistsFields.isEmpty()) {
+            conditionFileds.removeAll(unExistsFields);
+        }
+        if (update.getUpdateFields().size() < 2) { //一个主键，一个修改值至少需要两个数
+            throw new RuningException(ResultCode.PARAMETER_ERROR);
+        }
+        int u = recordMapper.update(update);
+        if (u <= 0) {
             throw new RuningException(ResultCode.RECORD_UPDATE_FAIL, update);
         }
     }
