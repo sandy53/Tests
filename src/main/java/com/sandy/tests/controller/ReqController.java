@@ -28,6 +28,7 @@ import com.sandy.tests.model.ApiInfo;
 import com.sandy.tests.model.ApiParams;
 import com.sandy.tests.model.ReqLogs;
 import com.sandy.tests.model.ReqParams;
+import com.sandy.tests.model.ReqResponse;
 import com.sandy.tests.record.model.RecordQuery;
 import com.sandy.tests.record.model.RecordQuery.Condition;
 import com.sandy.tests.record.service.RecordService;
@@ -77,16 +78,26 @@ public class ReqController {
         reqLog.setPath(path);
         reqLog.setMethod(method);
         recordService.doSave(RecordEnum.ReqLogs, Arrays.asList(reqLog));
-
         Map<String, String> httpParams = doSaveParams(ParamType.PARAM, reqLog, params, original);
         Map<String, String> httpHeaders = doSaveParams(ParamType.HEADER, reqLog, headers, original);
-
-        if (HttpMethod.POST.name().equalsIgnoreCase(method)) {
-            return doPost(path, httpParams, httpHeaders);
-
-        } else {
-            return doGet(path, httpParams, httpHeaders);
+        String resp = null;
+        try {
+            if (HttpMethod.POST.name().equalsIgnoreCase(method)) {
+                resp = doPost(path, httpParams, httpHeaders);
+            } else {
+                resp = doGet(path, httpParams, httpHeaders);
+            }
+        } catch (Exception e) {
+            logger.error("do-req e: {}", logCode, e);
+            resp = e.getMessage();
         }
+        //保存请求记录
+        ReqResponse response = new ReqResponse();
+        response.setCode(logCode);
+        response.setCreateTime(System.currentTimeMillis());
+        response.setResult(resp);
+        recordService.doSave(RecordEnum.ReqResponse, Arrays.asList(response));
+        return resp;
     }
 
     /**
@@ -195,16 +206,11 @@ public class ReqController {
 
     public String doPost(String path, Map<String, String> params,
                          Map<String, String> headers) throws JsonParseException,
-                                                      JsonMappingException, IOException {
-        try {
-            String resp = HttpRequester.post(path, params, headers);
-            logger.error("resp", resp);
-            return resp;
-        } catch (BusinessException e) {
-            logger.error("", e);
-        }
-        return null;
-
+                                                      JsonMappingException, IOException,
+                                                      BusinessException {
+        String resp = HttpRequester.post(path, params, headers);
+        logger.error("resp", resp);
+        return resp;
     }
 
     public String doGet(String path, Map<String, String> params,

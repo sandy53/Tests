@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.sandy.tests.model.ReqLogs;
+import com.sandy.tests.model.ReqResponse;
 
 /**
  *  初始化生成工具类
@@ -21,7 +21,7 @@ public final class GenernateUtils {
         Arrays.asList("serialVersionUID"));
 
     public static void main(String[] args) {
-        genernateBase(ReqLogs.class);
+        genernateBase(ReqResponse.class);
     }
 
     public static void genernateBase(List<Class<?>> clzs) {
