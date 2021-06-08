@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>org.jboss.xnio</groupId>
 			<artifactId>xnio-nio</artifactId>
-			<version>3.6.5.Final</version>
+			<version>3.7.9.Final</version>
 		</dependency>
 
 		<dependency>
